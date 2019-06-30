@@ -18,6 +18,7 @@ func BasicAuthMiddleWare(user string, password string, handler http.Handler) htt
 			handler.ServeHTTP(w, r)
 			return
 		}
+		w.Header().Set("WWW-Authenticate","Basic")
 		w.WriteHeader(http.StatusUnauthorized)
 		io.WriteString(w, http.StatusText(http.StatusUnauthorized))
 	})
